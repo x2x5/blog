@@ -6,152 +6,132 @@
 
 ---
 
-## 写新文章 / Writing a New Post
+## 写新文章
 
-### 中文文章
-
-在 `blog/` 目录下新建文件夹，命名格式为 `YYYY-MM-DD-slug/`，里面放 `index.mdx` 和图片。
-
-```
-blog/
-└─ 2026-05--<slug>/
-   ├─ index.mdx
-   └─ <image>.png
+```bash
+npm run new-post "文章标题" -- --slug url-slug
 ```
 
-文章头部格式：
+例如：
 
-```mdx
----
-title: 文章标题
-slug:  url- slug
-date:  YYYY-MM-DD
-authors: [x2x5]
-tags: [tag1, tag2]
-description: 文章摘要，会显示在卡片和 SEO 中。
----
+```bash
+npm run new-post "如何用 Docusaurus 搭博客" -- --slug how-to-build-blog
+```
 
-这里是正文。支持 Markdown 和 MDX。
+这个命令会自动：
 
-图片直接放在同目录引用：
+1. 在 `blog/` 下创建 `2026-05-04-how-to-build-blog/index.mdx`（中文）
+2. 在 `i18n/en/docusaurus-plugin-content-blog/` 下创建同名目录和文件（英文）
+3. 自动生成日期、slug、frontmatter 模板
 
-![图片描述](./<image>.png)
+之后你只需要：
+- 打开两个 `index.mdx` 文件，填入正文
+- 中文写中文，英文写英文
+- 图片放在文章同目录，相对路径引用
 
-数学公式：
+### 中英文文章对应规则
+
+中文路径：
+
+```
+blog/2026-05-04-how-to-build-blog/index.mdx
+```
+
+英文路径：
+
+```
+i18n/en/docusaurus-plugin-content-blog/2026-05-04-how-to-build-blog/index.mdx
+```
+
+**两个文件夹名称必须一致**（日期 + slug 相同），Docusaurus 才会把它们识别为同一篇文章的不同语言版本。
+
+### 标签
+
+预定义标签见 `blog/tags.yml`（中文）和 `i18n/en/docusaurus-plugin-content-blog/tags.yml`（英文）。  
+需要新标签时直接编辑这两个文件。
+
+### 数学公式
+
+行内：`$E = mc^2$`
+
+块级：
 
 $$
 E = mc^2
 $$
 
-{/* 在正文后加上截断标记，控制首页列表的预览长度 */}
-```
-
-可用标签见 `blog/tags.yml`。需要新标签时直接在该文件添加。
-
-### English Post
-
-Create a folder under `i18n/en/docusaurus-plugin-content-blog/` with the same folder name:
-
-```
-i18n/en/docusaurus-plugin-content-blog/
-└─ YYYY-MM-DD-<slug>/
-   ├─ index.mdx
-   └─ <image>.png
-```
-
-**Important:** The folder name (date + slug) must match the Chinese version exactly for Docusaurus to link them as translations of the same post.
-
-Frontmatter:
-
-```mdx
----
-title: Post Title
-slug:  url-slug
-date:  YYYY-MM-DD
-authors: [x2x5]
-tags: [tag1, tag2]
-description: Post summary for cards and SEO.
----
-```
-
-英语标签配置在 `i18n/en/docusaurus-plugin-content-blog/tags.yml`。
-
 ### 图片
 
-图片放在文章同级目录，在 MDX 中通过相对路径引用。支持 PNG、JPG、WebP 等格式。
+支持 PNG / JPG / WebP，放在文章同目录，MDX 中相对路径引用：
 
----
-
-## 本地开发 / Local Development
-
-```bash
-# 安装依赖（首次）
-npm install
-
-# 启动本地服务（热更新）
-npm run start
-
-# 构建生产版本
-npm run build
-
-# 本地预览构建结果
-npm run serve
+```mdx
+![图片描述](./image.png)
 ```
 
-`npm run start` 启动后浏览器打开 http://localhost:3000/blog/ 即可预览。修改文件会自动刷新。
+---
+
+## 本地开发
+
+```bash
+npm install        # 首次安装依赖
+npm run start      # 启动本地服务（热更新）
+npm run build      # 构建生产版本
+npm run serve      # 本地预览构建结果
+```
+
+`npm run start` 启动后访问 http://localhost:3000/blog/
 
 ---
 
-## 部署 / Deployment
+## 部署
 
-推送到 `main` 分支自动触发 GitHub Actions 部署到 GitHub Pages。
+推送到 `main` 分支自动触发 GitHub Actions 部署。
 
 ```bash
 git add .
-git commit -m "写点什么"
+git commit -m "新文章"
 git push
 ```
 
-部署完成后访问 https://x2x5.top/blog/ 查看。
-
 ---
 
-## 项目结构 / Project Structure
+## 项目结构
 
 ```
 blog/
-├─ .github/workflows/deploy.yml   # GitHub Actions 部署配置
-├─ blog/                           # 中文文章（Markdown/MDX）
-│  ├─ authors.yml                  # 中文作者信息
-│  ├─ tags.yml                     # 中文标签定义
+├─ .github/workflows/deploy.yml        # GitHub Actions 部署
+├─ blog/                                # 中文文章
+│  ├─ authors.yml
+│  ├─ tags.yml
 │  └─ YYYY-MM-DD-slug/
 │     ├─ index.mdx
 │     └─ *.png
-├─ i18n/en/
-│  └─ docusaurus-plugin-content-blog/  # 英文文章（结构和中文一致）
-│     ├─ authors.yml
-│     ├─ tags.yml
-│     └─ YYYY-MM-DD-slug/
-│        ├─ index.mdx
-│        └─ *.png
+├─ i18n/en/docusaurus-plugin-content-blog/  # 英文文章
+│  ├─ authors.yml
+│  ├─ tags.yml
+│  └─ YYYY-MM-DD-slug/
+│     ├─ index.mdx
+│     └─ *.png
+├─ scripts/
+│  └─ new-post.mjs                      # 新建文章脚本
 ├─ src/
-│  ├─ components/Comments.tsx      # giscus 评论组件
-│  ├─ css/custom.css               # 全局样式
-│  └─ theme/BlogPostPaginator/     # 文章底部评论区包裹组件
+│  ├─ components/Comments.tsx
+│  ├─ css/custom.css
+│  └─ theme/BlogPostPaginator/
 ├─ static/
-│  ├─ img/                         # 站点静态图片
+│  ├─ img/
 │  └─ .nojekyll
-└─ docusaurus.config.ts            # Docusaurus 主配置
+└─ docusaurus.config.ts
 ```
 
 ---
 
-## 技术栈 / Tech Stack
+## 技术栈
 
 - **框架：** Docusaurus 3 (React)
 - **语言：** TypeScript
 - **文章格式：** Markdown / MDX
 - **国际化：** 中文（默认）+ 英文
 - **数学公式：** KaTeX
-- **评论系统：** giscus（基于 GitHub Discussions）
+- **评论系统：** giscus（GitHub Discussions）
 - **部署：** GitHub Pages + GitHub Actions
