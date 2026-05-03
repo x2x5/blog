@@ -50,6 +50,10 @@ tags: []
 description: ${title}
 ---
 
+在这里写摘要。这部分会显示在首页列表。
+
+{/* truncate */}
+
 在这里写正文。
 `,
   en: `---
@@ -62,6 +66,10 @@ description: ${title}
 
 <!-- English version — translate from Chinese -->
 <!-- TODO: translate me -->
+
+Write your summary here. This part appears on the list page.
+
+{/* truncate */}
 
 Write your content here.
 `,
