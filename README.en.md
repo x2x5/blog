@@ -11,19 +11,28 @@ Personal blog built with [Docusaurus](https://docusaurus.io/), deployed on GitHu
 ## Writing a New Post
 
 ```bash
-npm run new-post "Post Title" -- --slug post-slug
+npm run new-post "Post Title"
 ```
 
-Example:
+Just pass the title. The slug is auto-generated from it:
 
 ```bash
-npm run new-post "How to Build a Blog with Docusaurus" -- --slug how-to-build-blog
+npm run new-post "Why TV Is Cheaper Than Phones"
+# Creates: blog/2026-05-04-why-tv-is-cheaper-t/index.mdx
+```
+
+If a post with the same title already exists, `-2`, `-3` etc. is appended to avoid overwriting.
+
+You can also specify a custom slug:
+
+```bash
+npm run new-post "How to Deploy with Docker" -- --slug docker-deploy
 ```
 
 This command will:
 
-1. Create `blog/YYYY-MM-DD-slug/index.mdx` (Chinese version)
-2. Create `i18n/en/docusaurus-plugin-content-blog/YYYY-MM-DD-slug/index.mdx` (English version)
+1. Create `blog/YYYY-MM-DD-slug/index.mdx` (Chinese)
+2. Create `i18n/en/docusaurus-plugin-content-blog/YYYY-MM-DD-slug/index.mdx` (English)
 3. Auto-generate the date, slug, and frontmatter template
 
 Then you just need to:

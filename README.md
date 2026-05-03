@@ -11,18 +11,27 @@
 ## 写新文章
 
 ```bash
-npm run new-post "文章标题" -- --slug url-slug
+npm run new-post "文章标题"
 ```
 
-例如：
+直接传标题就行，slug 会自动从标题生成：
 
 ```bash
-npm run new-post "如何用 Docusaurus 搭博客" -- --slug how-to-build-blog
+npm run new-post "为什么电视比手机要便宜"
+# 创建: blog/2026-05-04-为什么电视比手机要便宜/index.mdx
+```
+
+如果标题重复（同一天），会自动加 `-2`、`-3` 后缀避免覆盖。
+
+也可以手动指定短 slug：
+
+```bash
+npm run new-post "如何在 Docker 中部署" -- --slug docker-deploy
 ```
 
 这个命令会自动：
 
-1. 在 `blog/` 下创建 `2026-05-04-how-to-build-blog/index.mdx`（中文）
+1. 在 `blog/` 下创建 `YYYY-MM-DD-slug/index.mdx`（中文）
 2. 在 `i18n/en/docusaurus-plugin-content-blog/` 下创建同名目录和文件（英文）
 3. 自动生成日期、slug、frontmatter 模板
 
