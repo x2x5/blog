@@ -4,7 +4,7 @@
     "description": "The title in the navbar"
   },
   "item.label.Blog": {
-    "message": "Articles",
+    "message": "Posts",
     "description": "Navbar item with label Blog"
   }
 }
