@@ -43,28 +43,13 @@ const config: Config = {
     },
   },
 
-  plugins: [
-    [
-      '@easyops-cn/docusaurus-search-local',
-      {
-        docsDir: [],
-        blogDir: ['blog'],
-        language: ['zh', 'en'],
-      },
-    ],
-  ],
+  plugins: [],
 
   presets: [
     [
       'classic',
       {
-        docs: {
-          path: 'docs',
-          routeBasePath: '/docs',
-          sidebarPath: false,
-          showLastUpdateTime: false,
-          showLastUpdateAuthor: false,
-        },
+        docs: false,
         pages: false,
         blog: {
           path: 'blog',
