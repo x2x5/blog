@@ -1,0 +1,14 @@
+blog:
+  label: Blog
+  permalink: /blog
+  description: Blog related posts
+
+notes:
+  label: Notes
+  permalink: /notes
+  description: Notes and thoughts
+
+math:
+  label: Math
+  permalink: /math
+  description: Math related posts
