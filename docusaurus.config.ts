@@ -59,6 +59,7 @@ const config: Config = {
           showReadingTime: true,
           postsPerPage: 10,
           blogSidebarCount: 5,
+          onUntruncatedBlogPosts: 'ignore',
           editLocalizedFiles: true,
           remarkPlugins: [remarkMath],
           rehypePlugins: [rehypeKatex],

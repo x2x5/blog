@@ -47,27 +47,23 @@ title: ${title}
 slug: ${slug}
 date: ${date}
 tags: []
-description:
+description: ${title}
 ---
 
 在这里写正文。
-
-{/* truncate */}
 `,
   en: `---
 title: ${title}
 slug: ${slug}
 date: ${date}
 tags: []
-description:
+description: ${title}
 ---
 
 <!-- English version — translate from Chinese -->
 <!-- TODO: translate me -->
 
 Write your content here.
-
-{/* truncate */}
 `,
 };
 
