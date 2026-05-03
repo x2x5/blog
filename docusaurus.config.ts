@@ -43,6 +43,8 @@ const config: Config = {
     },
   },
 
+  plugins: ['docusaurus-lunr-search'],
+
   presets: [
     [
       'classic',
