@@ -1,5 +1,7 @@
 # x2x5 Blog
 
+> English | [中文](./README.md)
+
 Personal blog built with [Docusaurus](https://docusaurus.io/), deployed on GitHub Pages.
 
 **URL:** https://x2x5.top/blog/en/

@@ -1,5 +1,7 @@
 # x2x5 Blog
 
+> [English](./README.en.md) | 中文
+
 个人博客，基于 [Docusaurus](https://docusaurus.io/) 构建，部署于 GitHub Pages。
 
 **访问地址：** https://x2x5.top/blog/
