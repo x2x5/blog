@@ -13,9 +13,9 @@ export default function Comments(): JSX.Element {
     <div className="giscus-container">
       <Giscus
         repo="x2x5/blog"
-        repoId="REPLACE_WITH_GISCUS_REPO_ID"
+        repoId="R_kgDOSTQvog"
         category="Comments"
-        categoryId="REPLACE_WITH_GISCUS_CATEGORY_ID"
+        categoryId="DIC_kwDOSTQvos4C8Qjh"
         mapping="pathname"
         strict="0"
         reactionsEnabled="1"
