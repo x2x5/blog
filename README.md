@@ -14,14 +14,16 @@
 npm run new-post "文章标题"
 ```
 
-直接传标题就行，slug 会自动从标题生成：
+直接传标题即可，目录和 slug 自动生成：
 
 ```bash
 npm run new-post "为什么电视比手机要便宜"
-# 创建: blog/2026-05-04-为什么电视比手机要便宜/index.mdx
+# 创建: blog/2026-05-04_143015-为什么电视比手机要便宜/index.mdx
 ```
 
-如果标题重复（同一天），会自动加 `-2`、`-3` 后缀避免覆盖。
+目录名包含**时分秒**，所以即使同一天连续写多篇，也不会重复或覆盖。
+
+命令同时创建中英文两个模板文件。英文版先用中文标题占位，后续用 AI 翻译。
 
 也可以手动指定短 slug：
 
@@ -29,15 +31,9 @@ npm run new-post "为什么电视比手机要便宜"
 npm run new-post "如何在 Docker 中部署" -- --slug docker-deploy
 ```
 
-这个命令会自动：
+### 中英文文章对应规则
 
-1. 在 `blog/` 下创建 `YYYY-MM-DD-slug/index.mdx`（中文）
-2. 在 `i18n/en/docusaurus-plugin-content-blog/` 下创建同名目录和文件（英文）
-3. 自动生成日期、slug、frontmatter 模板
-
-之后你只需要：
-- 打开两个 `index.mdx` 文件，填入正文
-- 中文写中文，英文写英文
+中文写完以后，让 AI 帮你把 `i18n/en/docusaurus-plugin-content-blog/` 下对应的英文文件翻译好就行。
 - 图片放在文章同目录，相对路径引用
 
 ### 中英文文章对应规则

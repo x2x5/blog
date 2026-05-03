@@ -16,34 +16,25 @@ if (!title) {
   process.exit(1);
 }
 
-// Auto-generate a short key from the title
+// Build timestamp: YYYY-MM-DD_HHmmss
+const now = new Date();
+const pad = (n) => String(n).padStart(2, '0');
+const date = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}`;
+const time = `${pad(now.getHours())}${pad(now.getMinutes())}${pad(now.getSeconds())}`;
+
+// Auto-generate a short key from the title (for folder / url slug)
 function autoKey(text) {
-  // Keep letters, numbers, Chinese, replace everything else with hyphens
   let key = text
     .replace(/[^\w一-鿿]/g, '-')
     .replace(/-+/g, '-')
     .replace(/^-|-$/g, '')
     .toLowerCase();
-  // Truncate to 15 chars max
-  if (key.length > 15) {
-    key = key.slice(0, 15);
-  }
+  if (key.length > 15) key = key.slice(0, 15);
   return key;
 }
 
 const slug = customSlug || autoKey(title);
-const today = new Date().toLocaleDateString('en-CA'); // YYYY-MM-DD
-
-// Find a unique folder name (append -2, -3 if already exists)
-let folderName = `${today}-${slug}`;
-let suffix = 1;
-while (
-  fs.existsSync(path.join(rootDir, 'blog', folderName)) ||
-  fs.existsSync(path.join(rootDir, 'i18n', 'en', 'docusaurus-plugin-content-blog', folderName))
-) {
-  suffix++;
-  folderName = `${today}-${slug}-${suffix}`;
-}
+const folderName = `${date}_${time}-${slug}`;
 
 const dirs = {
   zh: path.join(rootDir, 'blog', folderName),
@@ -54,9 +45,8 @@ const templates = {
   zh: `---
 title: ${title}
 slug: ${slug}
-date: ${today}
+date: ${date}
 tags: []
-
 description:
 ---
 
@@ -67,11 +57,13 @@ description:
   en: `---
 title: ${title}
 slug: ${slug}
-date: ${today}
+date: ${date}
 tags: []
-
 description:
 ---
+
+<!-- English version — translate from Chinese -->
+<!-- TODO: translate me -->
 
 Write your content here.
 
@@ -87,4 +79,4 @@ for (const lang of ['zh', 'en']) {
   console.log(`✅  ${lang === 'zh' ? '中文' : '英文'}: ${lang === 'zh' ? 'blog' : 'i18n/en/docusaurus-plugin-content-blog'}/${folderName}/index.mdx`);
 }
 
-console.log('\nDone! Edit the files above and write your post.');
+console.log('\nDone! Edit the Chinese article first, then translate the English version.');

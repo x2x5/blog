@@ -14,14 +14,14 @@ Personal blog built with [Docusaurus](https://docusaurus.io/), deployed on GitHu
 npm run new-post "Post Title"
 ```
 
-Just pass the title. The slug is auto-generated from it:
+Just pass the title. The directory name includes a **timestamp** to avoid collisions:
 
 ```bash
 npm run new-post "Why TV Is Cheaper Than Phones"
-# Creates: blog/2026-05-04-why-tv-is-cheaper-t/index.mdx
+# Creates: blog/2026-05-04_143015-why-tv-is-cheaper/index.mdx
 ```
 
-If a post with the same title already exists, `-2`, `-3` etc. is appended to avoid overwriting.
+Both Chinese and English template files are created. The English one uses the Chinese title as a placeholder — translate it later with AI.
 
 You can also specify a custom slug:
 
@@ -29,15 +29,10 @@ You can also specify a custom slug:
 npm run new-post "How to Deploy with Docker" -- --slug docker-deploy
 ```
 
-This command will:
+### Chinese / English Workflow
 
-1. Create `blog/YYYY-MM-DD-slug/index.mdx` (Chinese)
-2. Create `i18n/en/docusaurus-plugin-content-blog/YYYY-MM-DD-slug/index.mdx` (English)
-3. Auto-generate the date, slug, and frontmatter template
-
-Then you just need to:
-- Open both `index.mdx` files and write the content
-- Write Chinese in the Chinese file, English in the English file
+Write the Chinese article first, then use AI to translate the English version at:
+`i18n/en/docusaurus-plugin-content-blog/YYYY-MM-DD_HHmmss-slug/index.mdx`
 - Place images in the same directory, reference them with relative paths
 
 ### Chinese / English Correspondence
