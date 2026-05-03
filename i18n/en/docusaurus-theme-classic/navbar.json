@@ -4,7 +4,7 @@
     "description": "The title in the navbar"
   },
   "item.label.Blog": {
-    "message": "文章",
+    "message": "Articles",
     "description": "Navbar item with label Blog"
   }
 }

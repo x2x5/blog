@@ -83,11 +83,6 @@ const config: Config = {
           position: 'left',
         },
         {
-          to: '/archive',
-          label: 'List',
-          position: 'left',
-        },
-        {
           type: 'localeDropdown',
           position: 'right',
         },

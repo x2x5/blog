@@ -16,3 +16,12 @@ html[data-theme='dark'] {
 .giscus-container {
   margin-top: 3rem;
 }
+
+/* Hide "Read more" button on blog list pages — title is already clickable */
+.blog-list-page article footer .col--3 {
+  display: none;
+}
+.blog-list-page article footer .col--9 {
+  max-width: 100%;
+  flex: 1 0 100%;
+}
