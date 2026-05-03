@@ -35,7 +35,6 @@ const templates = {
 title: ${title}
 slug: ${slug}
 date: ${today}
-authors: [x2x5]
 tags: []
 description:
 ---
@@ -48,7 +47,6 @@ description:
 title: ${title}
 slug: ${slug}
 date: ${today}
-authors: [x2x5]
 tags: []
 description:
 ---

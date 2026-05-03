@@ -84,51 +84,14 @@ const config: Config = {
         },
         {
           to: '/archive',
-          label: 'Archive',
+          label: 'List',
           position: 'left',
         },
         {
           type: 'localeDropdown',
           position: 'right',
         },
-        {
-          href: 'https://github.com/x2x5/blog',
-          label: 'GitHub',
-          position: 'right',
-        },
       ],
-    },
-    footer: {
-      style: 'dark',
-      links: [
-        {
-          title: 'Site',
-          items: [
-            {
-              label: 'Blog',
-              to: '/',
-            },
-            {
-              label: 'Archive',
-              to: '/archive',
-            },
-          ],
-        },
-        {
-          title: 'Links',
-          items: [
-            {
-              label: 'GitHub',
-              href: 'https://github.com/x2x5',
-            },
-            {
-              label: 'Main Site',
-              href: 'https://x2x5.top',
-            },
-          ],
-        },
-      ],
-      copyright: `Copyright © ${new Date().getFullYear()} x2x5.`,
     },
     prism: {
       theme: require('prism-react-renderer').themes.github,

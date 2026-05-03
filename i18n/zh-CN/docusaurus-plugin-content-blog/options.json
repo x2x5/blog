@@ -1,0 +1,14 @@
+{
+  "title": {
+    "message": "x2x5 Blog",
+    "description": "The title for the blog used in SEO"
+  },
+  "description": {
+    "message": "x2x5 的个人博客",
+    "description": "The description for the blog used in SEO"
+  },
+  "sidebar.title": {
+    "message": "近期文章",
+    "description": "The label for the left sidebar"
+  }
+}

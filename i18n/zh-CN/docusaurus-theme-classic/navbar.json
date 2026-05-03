@@ -1,0 +1,14 @@
+{
+  "title": {
+    "message": "x2x5 Blog",
+    "description": "The title in the navbar"
+  },
+  "item.label.Blog": {
+    "message": "摘要",
+    "description": "Navbar item with label Blog"
+  },
+  "item.label.List": {
+    "message": "列表",
+    "description": "Navbar item with label List"
+  }
+}
