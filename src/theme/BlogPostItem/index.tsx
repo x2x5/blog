@@ -22,7 +22,13 @@ export default function BlogPostItem({children, className}: Props): ReactNode {
   if (isBlogPostPage) {
     return (
       <BlogPostItemContainer className={clsx(containerClassName, className)}>
-        <BlogPostItemHeader />
+        <BlogPostItemHeaderTitle />
+        {metadata.tags.length > 0 && (
+          <div style={{marginBottom: '0.5rem'}}>
+            <TagsListInline tags={metadata.tags} />
+          </div>
+        )}
+        <BlogPostItemHeaderInfo />
         <BlogPostItemContent>{children}</BlogPostItemContent>
         <BlogPostItemFooter />
       </BlogPostItemContainer>
