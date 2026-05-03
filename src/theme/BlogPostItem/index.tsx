@@ -45,6 +45,7 @@ export default function BlogPostItem({children, className}: Props): ReactNode {
       )}
       <BlogPostItemHeaderInfo />
       <BlogPostItemContent>{children}</BlogPostItemContent>
+      <BlogPostItemFooter />
     </BlogPostItemContainer>
   );
 }
