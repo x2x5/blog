@@ -12,7 +12,7 @@ export default function BlogPostItemFooter(): ReactNode {
   // List view: show read more link
   if (!isBlogPostPage) {
     return (
-      <footer className="docusaurus-mt-lg">
+      <footer style={{marginTop: '0.5rem'}}>
         <ReadMoreLink blogPostTitle={title} to={permalink} />
       </footer>
     );
