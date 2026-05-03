@@ -64,8 +64,8 @@ tags: []
 description: ${title}
 ---
 
-<!-- English version — translate from Chinese -->
-<!-- TODO: translate me -->
+{/* English version — translate from Chinese */}
+{/* TODO: translate me */}
 
 Write your summary here. This part appears on the list page.
 
