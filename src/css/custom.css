@@ -25,3 +25,30 @@ html[data-theme='dark'] {
   max-width: 100%;
   flex: 1 0 100%;
 }
+
+/* Language toggle in navbar */
+.locale-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--ifm-color-emphasis-600);
+  text-decoration: none !important;
+  transition: border-color 0.15s, color 0.15s;
+}
+.locale-toggle:hover {
+  border-color: var(--ifm-color-emphasis-500);
+  color: var(--ifm-color-emphasis-800);
+}
+.locale-toggle__sep {
+  color: var(--ifm-color-emphasis-400);
+  font-weight: 400;
+}
+.locale-toggle__active {
+  color: var(--ifm-color-primary);
+}
