@@ -7,7 +7,6 @@ import BlogPostItemHeaderTitle from '@theme/BlogPostItem/Header/Title';
 import BlogPostItemHeaderInfo from '@theme/BlogPostItem/Header/Info';
 import BlogPostItemContent from '@theme/BlogPostItem/Content';
 import BlogPostItemFooter from '@theme/BlogPostItem/Footer';
-import TagsListInline from '@theme/TagsListInline';
 import type {Props} from '@theme/BlogPostItem';
 
 function useContainerClassName() {
@@ -16,18 +15,13 @@ function useContainerClassName() {
 }
 
 export default function BlogPostItem({children, className}: Props): ReactNode {
-  const {isBlogPostPage, metadata} = useBlogPost();
+  const {isBlogPostPage} = useBlogPost();
   const containerClassName = useContainerClassName();
 
   if (isBlogPostPage) {
     return (
       <BlogPostItemContainer className={clsx(containerClassName, className)}>
         <BlogPostItemHeaderTitle />
-        {metadata.tags.length > 0 && (
-          <div style={{marginBottom: '0.5rem'}}>
-            <TagsListInline tags={metadata.tags} />
-          </div>
-        )}
         <BlogPostItemHeaderInfo />
         <BlogPostItemContent>{children}</BlogPostItemContent>
         <BlogPostItemFooter />
@@ -38,11 +32,6 @@ export default function BlogPostItem({children, className}: Props): ReactNode {
   return (
     <BlogPostItemContainer className={clsx(containerClassName, className)}>
       <BlogPostItemHeaderTitle />
-      {metadata.tags.length > 0 && (
-        <div style={{marginBottom: '0.5rem'}}>
-          <TagsListInline tags={metadata.tags} />
-        </div>
-      )}
       <BlogPostItemHeaderInfo />
       <BlogPostItemContent>{children}</BlogPostItemContent>
       <BlogPostItemFooter />

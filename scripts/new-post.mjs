@@ -16,11 +16,19 @@ if (!title) {
   process.exit(1);
 }
 
-// Build timestamp: YYYY-MM-DD_HHmmss
+// Build timestamp: YYMMDD-HHmmss
 const now = new Date();
 const pad = (n) => String(n).padStart(2, '0');
-const date = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}`;
+const shortYear = String(now.getFullYear()).slice(-2);
+const date = `${shortYear}${pad(now.getMonth() + 1)}${pad(now.getDate())}`;
+const fullDate = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}`;
 const time = `${pad(now.getHours())}${pad(now.getMinutes())}${pad(now.getSeconds())}`;
+const tzOffsetMinutes = -now.getTimezoneOffset();
+const tzSign = tzOffsetMinutes >= 0 ? '+' : '-';
+const tzAbs = Math.abs(tzOffsetMinutes);
+const tzHours = pad(Math.floor(tzAbs / 60));
+const tzMinutes = pad(tzAbs % 60);
+const isoDateTime = `${fullDate}T${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}${tzSign}${tzHours}:${tzMinutes}`;
 
 // Auto-generate a short key from the title (for folder / url slug)
 function autoKey(text) {
@@ -34,20 +42,17 @@ function autoKey(text) {
 }
 
 const slug = customSlug || autoKey(title);
-const folderName = `${date}_${time}-${slug}`;
+const folderName = `${date}-${time}-${slug}`;
 
 const dirs = {
   zh: path.join(rootDir, 'blog', folderName),
-  en: path.join(rootDir, 'i18n', 'en', 'docusaurus-plugin-content-blog', folderName),
 };
 
 const templates = {
   zh: `---
 title: ${title}
 slug: ${slug}
-date: ${date}
-tags: []
-description: ${title}
+date: ${isoDateTime}
 ---
 
 在这里写摘要。这部分会显示在首页列表。
@@ -56,31 +61,12 @@ description: ${title}
 
 在这里写正文。
 `,
-  en: `---
-title: ${title}
-slug: ${slug}
-date: ${date}
-tags: []
-description: ${title}
----
-
-{/* English version — translate from Chinese */}
-{/* TODO: translate me */}
-
-Write your summary here. This part appears on the list page.
-
-{/* truncate */}
-
-Write your content here.
-`,
 };
 
-for (const lang of ['zh', 'en']) {
-  const dir = dirs[lang];
-  const filePath = path.join(dir, 'index.mdx');
-  fs.mkdirSync(dir, { recursive: true });
-  fs.writeFileSync(filePath, templates[lang]);
-  console.log(`✅  ${lang === 'zh' ? '中文' : '英文'}: ${lang === 'zh' ? 'blog' : 'i18n/en/docusaurus-plugin-content-blog'}/${folderName}/index.mdx`);
-}
+const dir = dirs.zh;
+const filePath = path.join(dir, 'index.mdx');
+fs.mkdirSync(dir, { recursive: true });
+fs.writeFileSync(filePath, templates.zh);
+console.log(`✅  中文: blog/${folderName}/index.mdx`);
 
-console.log('\nDone! Edit the Chinese article first, then translate the English version.');
+console.log('\nDone!');

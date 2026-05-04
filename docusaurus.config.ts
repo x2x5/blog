@@ -30,15 +30,11 @@ const config: Config = {
 
   i18n: {
     defaultLocale: 'zh-CN',
-    locales: ['zh-CN', 'en'],
+    locales: ['zh-CN'],
     localeConfigs: {
       'zh-CN': {
         label: '中文',
         htmlLang: 'zh-CN',
-      },
-      en: {
-        label: 'English',
-        htmlLang: 'en',
       },
     },
   },
@@ -60,7 +56,7 @@ const config: Config = {
           postsPerPage: 10,
           blogSidebarCount: 5,
           onUntruncatedBlogPosts: 'ignore',
-          editLocalizedFiles: true,
+          editLocalizedFiles: false,
           remarkPlugins: [remarkMath],
           rehypePlugins: [rehypeKatex],
           feedOptions: {
@@ -79,17 +75,7 @@ const config: Config = {
     image: 'img/social-card.png',
     navbar: {
       title: 'x2x5 Blog',
-      items: [
-        {
-          to: '/',
-          label: 'Blog',
-          position: 'left',
-        },
-        {
-          type: 'localeDropdown',
-          position: 'right',
-        },
-      ],
+      items: [],
     },
     prism: {
       theme: require('prism-react-renderer').themes.github,

@@ -1,0 +1,158 @@
+---
+title: why 用 Docusaurus 建 blog？
+slug: why-docusaurus
+date: 2026-05-04T13:33:00+08:00
+---
+
+我想搞个 blog，但怕维护麻烦。问了 Deepseek，它说用 Docusaurus。
+
+它给了一张对比表：
+
+| 方案 | 类型 | 写作体验 | 定制灵活度 | 维护成本 |
+|------|------|----------|------------|----------|
+| Docusaurus | SSG (React) | MDX，组件可嵌入 | 高 | 低 |
+| Hugo | SSG (Go) | Markdown，模板语法 | 中 | 低 |
+| Next.js + MDX | SSR/SSG | 全自定义 | 最高 | 高 |
+| WordPress | 动态 | 可视化编辑 | 中 | 高 |
+
+{/* truncate */}
+
+Deepseek 说选 Docusaurus 的理由有三个。
+
+## 理由一：支持 markdown 标准语法
+
+下面就是我用 Markdown 写东西时最常见的用法，全部原生支持：
+
+### 基础排版
+
+- **加粗**、*斜体*、~~删除线~~ 随手就来
+- 引用块用来突出要点：
+
+> Docusaurus 帮你把 Markdown 文件自动编译成静态页面，部署到任何地方都行。
+
+- 分割线也很干净：
+
+---
+
+### 列表嵌套
+
+1. 第一步：安装依赖
+   - 创建项目
+   - 配置 `docusaurus.config.js`
+2. 第二步：写文章
+   - 使用 `mdx` 文件
+   - 嵌入代码片段
+3. 第三步：部署
+   - 构建静态文件
+   - 推到 GitHub Pages 或 Vercel
+
+### 代码块高亮
+
+不管是 bash、python 还是 javascript，都能高亮：
+
+```bash
+# 新建一篇文章
+npm run new-post "我的新文章"
+```
+
+它会自动生成文章模板文件，省去手动建目录的麻烦。
+
+```python
+def greet(name):
+    return f"你好，{name}"
+```
+
+### 表格
+
+前面那个对比表就是 Markdown 表格。支持对齐方式，写 API 文档或者对比信息都很方便。
+
+## 理由二：对技术写作友好
+
+如果只是基础排版，很多工具都能做。但 Docusaurus 真正打动我的是这些：
+
+### 数学公式
+
+使用 KaTeX 渲染，行内公式像 $E = mc^2$ 和 $x^2 + y^2 = z^2$ 写起来很自然。块级公式也漂亮：
+
+$$
+F(\omega) = \int_{-\infty}^{\infty} f(t) e^{-i \omega t} \, dt
+$$
+
+### 图片与说明
+
+插入图片只需要标准语法，还能加标题：
+
+![封面图片](./cover.png)
+
+> 这是我的博客封面图，图床直接用静态文件夹，构建时自动打包。
+
+### 链接和交叉引用
+
+可以链接到外部：
+
+- [Docusaurus 官方文档](https://docusaurus.io/)
+- [Markdown 语法指南](https://www.markdownguide.org/)
+
+也可以内部跳转到文章段落，比如跳到 [理由三](#理由三mdx-可以直接嵌-react-组件)。
+
+### 任务列表
+
+记录待办事项很方便：
+
+- [x] 搭建博客框架
+- [x] 配置 Markdown 插件
+- [x] 完善复制全文源码
+- [ ] 开启评论功能
+
+## 理由三：MDX 可以直接嵌 React 组件
+
+纯 Markdown 只能写静态内容，MDX 则可以直接插组件。
+
+import HighlightBox from '@site/src/components/HighlightBox';
+
+<details>
+  <summary>点击查看答案</summary>
+
+  因为真实 DOM 操作很慢，React 先在虚拟 DOM 上 diff，再批量更新真实 DOM。
+</details>
+
+<HighlightBox title="虚拟 DOM 是什么？">
+
+简单说，就是用 JS 对象模拟的一棵 DOM 树。React 每次更新时先改这棵树，算出差异，再批量更新页面。
+
+</HighlightBox>
+
+这就是 MDX 真正有价值的地方：文章不只是文本，还能直接承载交互。
+
+---
+
+最后是日常写作流程：
+
+```bash
+npm run new-post "标题"
+```
+
+写作时本地预览：
+
+```bash
+npm run start
+```
+
+发布前看最终效果：
+
+```bash
+npm run build
+npm run serve
+```
+
+确认没问题后提交到仓库：
+
+```bash
+git add .
+git commit -m "新文章"
+git push
+```
+
+推送后会触发 GitHub Actions 自动部署。
+
+这就是我选 Docusaurus 的原因：**写作轻量，定制灵活，维护省心**。如果你也在挑博客工具，不妨试一下。

@@ -1,12 +1,40 @@
 .container {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
+  color: var(--ifm-color-emphasis-600);
+  margin-bottom: 0.9rem;
+}
+
+.row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 0.5rem;
+  width: 100%;
+  max-width: 100%;
 }
 
-.wordCount {
-  color: var(--ifm-color-emphasis-600);
+.metaText {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.dot {
+  color: var(--ifm-color-emphasis-500);
+}
+
+.copyButton {
+  border: 1px solid var(--ifm-color-emphasis-300);
+  background: transparent;
+  color: var(--ifm-color-emphasis-700);
+  font-size: 0.95rem;
+  line-height: 1;
+  border-radius: 6px;
+  width: 1.9rem;
+  height: 1.9rem;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 }

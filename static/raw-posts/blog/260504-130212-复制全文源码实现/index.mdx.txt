@@ -1,0 +1,87 @@
+---
+title: copy 全文の源码是咋做的？
+slug: copy-source
+date: 2026-05-04T13:02:12+08:00
+---
+
+
+为什么要有复制全文源码的功能？
+
+因为方便直接贴给 AI，让 AI 分析和理解。
+
+为什么不直接从页面复制？
+
+因为无法保留格式，比如 `$$...$$`、`$...$` 这些原始内容。复制完了以后格式会乱。
+
+所以我们的目标是：
+
+{/* truncate */}
+
+1. 用户点一下按钮
+2. 复制出来的是这篇文章的 **MDX 原文源码**，不是 HTML 提取再反转 Markdown
+
+## 最终方案：构建前生成源码文件
+
+1. 构建前扫描 `blog/**/index.mdx`
+2. 读取每篇文件原文
+3. 为每篇文章生成一个静态源码文件（例如 `static/raw-posts/blog/.../index.mdx.txt`）
+4. 页面点击“复制源码”时，只请求当前文章对应那一个 `.txt` 文件
+
+## 关键实现 1：生成按篇 `.txt` 文件
+
+新增脚本：`scripts/generate-raw-posts.mjs`
+
+核心逻辑：
+
+```js
+const rel = 'blog/260504-130212-复制全文源码实现/index.mdx';
+const output = `static/raw-posts/${rel}.txt`;
+fs.writeFileSync(output, fs.readFileSync(rel, 'utf8'));
+```
+
+构建后每篇文章都会有一个对应的 `.txt` 文件，源码就是原封不动写进去。
+
+## 关键实现 2：接入 npm 生命周期
+
+在 `package.json` 增加：
+
+```json
+{
+  "scripts": {
+    "prestart": "node scripts/generate-raw-posts.mjs",
+    "prebuild": "node scripts/generate-raw-posts.mjs",
+    "predeploy": "node scripts/generate-raw-posts.mjs"
+  }
+}
+```
+
+这样你不需要额外手动跑脚本：
+
+- `npm run start` 前会生成
+- `npm run build` 前会生成
+- `npm run deploy` 前会生成
+
+## 关键实现 3：按钮点击复制
+
+按钮放在文章页标题右侧，点击流程：
+
+1. 读取当前文章 metadata 的 `source`
+2. 把 `source` 转成相对路径
+3. 请求 `raw-posts/<source>.txt`
+4. `navigator.clipboard.writeText(...)`
+
+简化版代码：
+
+```ts
+const normalized = source.replace('@site/', '');
+const rawFileUrl = `${baseUrl}raw-posts/${normalized}.txt`;
+const text = await (await fetch(rawFileUrl)).text();
+await navigator.clipboard.writeText(text);
+```
+
+## 按篇加载
+
+一开始可以用 `posts.json`（把所有文章都放一个文件里），实现简单。  
+但文章数量增长后会出现不必要的加载开销：复制一篇，却先下载全部源码。
+
+改成按篇文件后：只加载当前文章需要的那一份源码，体积更合理。

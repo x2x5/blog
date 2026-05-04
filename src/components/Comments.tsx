@@ -18,7 +18,7 @@ export default function Comments(): JSX.Element {
         categoryId="DIC_kwDOSTQvos4C8Qjh"
         mapping="pathname"
         strict="0"
-        reactionsEnabled="1"
+        reactionsEnabled="0"
         emitMetadata="0"
         inputPosition="bottom"
         theme={colorMode === 'dark' ? 'dark' : 'light'}

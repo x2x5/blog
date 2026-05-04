@@ -17,14 +17,9 @@ html[data-theme='dark'] {
   margin-top: 3rem;
 }
 
-/* Tags on blog list pages sit between title and date */
-.blog-list-page article .tags-list {
-  margin-bottom: 0;
-}
-
 /* Language toggle in navbar */
 .locale-toggle {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 6px;
   padding: 4px 10px;
@@ -36,6 +31,9 @@ html[data-theme='dark'] {
   color: var(--ifm-color-emphasis-600);
   text-decoration: none !important;
   transition: border-color 0.15s, color 0.15s;
+  flex: 0 0 auto;
+  position: relative;
+  z-index: 1;
 }
 .locale-toggle:hover {
   border-color: var(--ifm-color-emphasis-500);
@@ -47,4 +45,13 @@ html[data-theme='dark'] {
 }
 .locale-toggle__active {
   color: var(--ifm-color-primary);
+}
+
+/* Ensure right-side navbar controls don't overlap and have clear spacing */
+.navbar__items--right > * {
+  margin-left: 0.6rem;
+}
+
+.navbar__items--right > *:first-child {
+  margin-left: 0;
 }

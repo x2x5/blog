@@ -27,6 +27,12 @@ function groupByMonth(items: any[]) {
   return groups;
 }
 
+function sortByDateDesc(items: any[]) {
+  return [...items].sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
+  );
+}
+
 function BlogSidebarYearGroup({
   year,
   yearGroupHeadingClassName,
@@ -56,7 +62,8 @@ function BlogSidebarContent(props: any): ReactNode {
   } = useDocusaurusContext();
 
   if (themeConfig.blog.sidebar.groupByYear) {
-    const itemsByYear = groupBlogSidebarItemsByYear(items);
+    const sortedItems = sortByDateDesc(items);
+    const itemsByYear = groupBlogSidebarItemsByYear(sortedItems);
     return (
       <>
         {itemsByYear.map(([year, yearItems]) => (
@@ -65,7 +72,9 @@ function BlogSidebarContent(props: any): ReactNode {
             year={year}
             yearGroupHeadingClassName={yearGroupHeadingClassName}
             monthGroupHeadingClassName={monthGroupHeadingClassName}>
-            {Array.from(groupByMonth(yearItems).entries()).map(
+            {Array.from(groupByMonth(sortByDateDesc(yearItems)).entries())
+              .sort((a, b) => b[0] - a[0])
+              .map(
               ([month, monthItems]) => (
                 <div key={month} style={{marginBottom: '0.75rem'}}>
                   <Heading
@@ -81,7 +90,7 @@ function BlogSidebarContent(props: any): ReactNode {
                     }}>
                     {monthName(month, currentLocale)}
                   </Heading>
-                  <ListComponent items={monthItems} />
+                  <ListComponent items={sortByDateDesc(monthItems)} />
                 </div>
               ),
             )}
@@ -90,7 +99,7 @@ function BlogSidebarContent(props: any): ReactNode {
       </>
     );
   } else {
-    return <ListComponent items={items} />;
+    return <ListComponent items={sortByDateDesc(items)} />;
   }
 }
 
